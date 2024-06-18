@@ -48,7 +48,7 @@ function Member() {
     <link rel="stylesheet" href="/css/vendor/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/styles.min.css" />
     <link rel="stylesheet" href="/css/vendor/simplebar.css" />
-    <link rel="stylesheett" href="/css/Calendar.css" />
+    <link rel="stylesheet" href="/css/Calendar.css" />
     <link rel="stylesheet" href="/css/vendor/tiny-slider.css" />
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>

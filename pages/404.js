@@ -2,17 +2,16 @@ import Head from 'next/head';
 export default function Custom404() {
   return (
     <div>
-    <Head>
-    <title>My page title</title>
-
+   
+   <Head>
+    <title>{title1}</title>
     <link rel="stylesheet" href="/css/vendor/bootstrap.min.css" />
-<link rel="stylesheet" href="/css/styles.min.css" />
-<link rel="stylesheet" href="/css/vendor/simplebar.css" />
-
-<link rel="stylesheet" href="/css/vendor/tiny-slider.css" />
-
+    <link rel="stylesheet" href="/css/styles.min.css" />
+    <link rel="stylesheet" href="/css/vendor/simplebar.css" />
+    <link rel="stylesheet" href="/css/Calendar.css" />
+    <link rel="stylesheet" href="/css/vendor/tiny-slider.css" />
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-  </Head>
+    </Head>
     <div className="error-section">
      
       <p className="error-section-title">404</p>
