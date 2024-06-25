@@ -45,7 +45,7 @@ function Groups() {
       </Head>
     <Navcomponent />
     <Navcomponent1 />
-    <Navcomponent2 />
+    <Navcomponent2 currentPage={0} />
     <Chatwidget />
     <Chatwidget1 />
     <Header1 />

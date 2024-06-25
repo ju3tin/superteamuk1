@@ -59,7 +59,7 @@ function Member() {
     </Head>
     <Navcomponent  jsonData={jsonData2}  />
     <Navcomponent1 />
-    <Navcomponent2 />
+    <Navcomponent2 currentPage={1} />
     <Chatwidget />
     <Chatwidget1 />
     <Header1 />

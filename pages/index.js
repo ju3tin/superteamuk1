@@ -25,6 +25,7 @@ export default function Home() {
 const bannerImageUrl = '/img/banner/newsfeed-icon.png';
 const title1 = 'Newsfeed';
 const description = 'Check what your friends have been up to!';
+//const [currentPage, setCurrentPage] = useState(0);  // Define currentPage
 
 useEffect(() => {
 const script = document.createElement("script");
@@ -52,7 +53,7 @@ return (
    </Head>
  <Navcomponent />
  <Navcomponent1 />
- <Navcomponent2 />
+ <Navcomponent2 currentPage={2} />
  <Chatwidget />
  <Chatwidget1 />
  <Header1 />

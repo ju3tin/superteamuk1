@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import jsonData from '../../../menuitems.json'
 
-function navwidget2() {
+function navwidget2({currentPage}) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -104,7 +104,7 @@ function navwidget2() {
     
 <ul className="menu">
     {jsonData && jsonData.map((item, index) => (
-        <JSONItem key={index} data={item} />
+        <JSONItem key={index} data={item} index={index} currentPage={currentPage}/>
       ))}
       
      
@@ -221,13 +221,17 @@ function navwidget2() {
 
 
 
-function JSONItem({ data, currentPage }) {
-  const isActive = currentPage === data.link ? 'active' : '';
+function JSONItem({ data, currentPage, index }) {
+   // Define currentPage on line 55 and assign it a specific number
+//   const currentPage = 0; // You can set this to any number you need
+
+   // Check if currentPage is 0 and index is 0, then set as active
+     const isActive = currentPage === index ? 'active' : '';
 
   return (
  
       
-    <li className="menu-item">
+    <li className={`menu-item ${isActive}`}>
         
     <a className="menu-item-link" href={`${data.link}`} >
       
@@ -235,7 +239,7 @@ function JSONItem({ data, currentPage }) {
         <use xlinkHref={`#svg-${data.icon}`}></use>
       </svg>
       
-     {data.title}
+     {data.title}<span>({index + 1})({currentPage})</span> 
     </a>
     
   </li>
