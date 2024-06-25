@@ -18,6 +18,7 @@ function Member() {
     const bannerImageUrl = '/img/banner/quests-icon.png';
     const title1 = 'Quests';
     const description = 'Complete quests to gain experience and level up!';
+    const page = 4;
 
  useEffect(() => {
     const script = document.createElement("script");
@@ -42,9 +43,9 @@ function Member() {
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-    <Navcomponent  jsonData={jsonData2}  />
-    <Navcomponent1 />
-    <Navcomponent2 />
+      <Navcomponent currentPage={page}/>
+    <Navcomponent1 currentPage={page} />
+ <Navcomponent2 currentPage={page} />
     <Chatwidget />
     <Chatwidget1 />
     <Header1 />
