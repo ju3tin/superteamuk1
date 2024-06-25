@@ -239,7 +239,7 @@ function JSONItem({ data, currentPage, index }) {
         <use xlinkHref={`#svg-${data.icon}`}></use>
       </svg>
       
-     {data.title}<span>({index + 1})({currentPage})</span> 
+     {data.title}
     </a>
     
   </li>

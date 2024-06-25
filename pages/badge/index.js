@@ -20,7 +20,7 @@ function Badges() {
     const bannerImageUrl = '/img/banner/badges-icon.png';
     const title1 = 'Badges';
     const description = 'Check out all your unlocked and locked badges!';
-
+    const page = 3;
  useEffect(() => {
     const script = document.createElement("script");
     script.src = "/js/app.bundle.min.js";
@@ -44,10 +44,9 @@ function Badges() {
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-    <Navcomponent  jsonData={jsonData2}  />
-    <Navcomponent1 />
-    <Navcomponent2 />
-    <Header1 />
+      <Navcomponent currentPage={page}/>
+    <Navcomponent1 currentPage={page} />
+ <Navcomponent2 currentPage={page} /> <Header1 />
     <Bar1 />
     <div className="content-grid" style={{'transform': 'translate(368px)', 'transition': 'transform 0.4s ease-in-out'}}>
    <Banner bannerdescription={description} bannertitle={title1} bannerimage={bannerImageUrl}/>

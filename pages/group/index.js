@@ -19,6 +19,7 @@ function Groups() {
     const bannerImageUrl = '/img/banner/groups-icon.png';
     const title1 = 'Groups';
     const description = 'Browse all the groups of the community!';
+    const page = 1;
 
  useEffect(() => {
     const script = document.createElement("script");
@@ -43,9 +44,9 @@ function Groups() {
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-    <Navcomponent />
-    <Navcomponent1 />
-    <Navcomponent2 currentPage={0} />
+      <Navcomponent currentPage={page}/>
+    <Navcomponent1 currentPage={page} />
+ <Navcomponent2 currentPage={page} />
     <Chatwidget />
     <Chatwidget1 />
     <Header1 />
