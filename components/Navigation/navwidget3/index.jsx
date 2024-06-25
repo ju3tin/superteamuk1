@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import jsonData from '../../../menuitems.json'
 
 function navwidget2() {
   const [isClient, setIsClient] = useState(false);
@@ -100,157 +100,15 @@ function navwidget2() {
 
 
 {/* MENU */}
+
+    
 <ul className="menu">
-  {/* MENU ITEM */}
-  <li className="menu-item">
-    {/* MENU ITEM LINK */}
-    <a className="menu-item-link" href="newsfeed.html">
-      {/* MENU ITEM LINK ICON */}
-      <svg className="menu-item-link-icon icon-newsfeed">
-        <use xlinkHref="#svg-newsfeed"></use>
-      </svg>
-      {/* /MENU ITEM LINK ICON */}
-      Newsfeed
-    </a>
-    {/* /MENU ITEM LINK */}
-  </li>
-  {/* /MENU ITEM */}
-
-  {/* MENU ITEM */}
-  <li className="menu-item">
-    {/* MENU ITEM LINK */}
-    <a className="menu-item-link" href="overview.html">
-      {/* MENU ITEM LINK ICON */}
-      <svg className="menu-item-link-icon icon-overview">
-        <use xlinkHref="#svg-overview"></use>
-      </svg>
-      {/* /MENU ITEM LINK ICON */}
-      Overview
-    </a>
-    {/* /MENU ITEM LINK */}
-  </li>
-  {/* /MENU ITEM */}
-
-  {/* MENU ITEM */}
-  <li className="menu-item">
-    {/* MENU ITEM LINK */}
-    <a className="menu-item-link" href="groups.html">
-      {/* MENU ITEM LINK ICON */}
-      <svg className="menu-item-link-icon icon-group">
-        <use xlinkHref="#svg-group"></use>
-      </svg>
-      {/* /MENU ITEM LINK ICON */}
-      Groups
-    </a>
-    {/* /MENU ITEM LINK */}
-  </li>
-  {/* /MENU ITEM */}
-
-  {/* MENU ITEM */}
-  <li className="menu-item">
-    {/* MENU ITEM LINK */}
-    <a className="menu-item-link" href="members.html">
-      {/* MENU ITEM LINK ICON */}
-      <svg className="menu-item-link-icon icon-members">
-        <use xlinkHref="#svg-members"></use>
-      </svg>
-      {/* /MENU ITEM LINK ICON */}
-      Members
-    </a>
-    {/* /MENU ITEM LINK */}
-  </li>
-  {/* /MENU ITEM */}
-
-  {/* MENU ITEM */}
-  <li className="menu-item">
-    {/* MENU ITEM LINK */}
-    <a className="menu-item-link" href="badges.html">
-      {/* MENU ITEM LINK ICON */}
-      <svg className="menu-item-link-icon icon-badges">
-        <use xlinkHref="#svg-badges"></use>
-      </svg>
-      {/* /MENU ITEM LINK ICON */}
-      Badges
-    </a>
-    {/* /MENU ITEM LINK */}
-  </li>
-  {/* /MENU ITEM */}
-
-  {/* MENU ITEM */}
-  <li className="menu-item">
-    {/* MENU ITEM LINK */}
-    <a className="menu-item-link" href="quests.html">
-      {/* MENU ITEM LINK ICON */}
-      <svg className="menu-item-link-icon icon-quests">
-        <use xlinkHref="#svg-quests"></use>
-      </svg>
-      {/* /MENU ITEM LINK ICON */}
-      Quests
-    </a>
-    {/* /MENU ITEM LINK */}
-  </li>
-  {/* /MENU ITEM */}
-
-  {/* MENU ITEM */}
-  <li className="menu-item">
-    {/* MENU ITEM LINK */}
-    <a className="menu-item-link" href="streams.html">
-      {/* MENU ITEM LINK ICON */}
-      <svg className="menu-item-link-icon icon-streams">
-        <use xlinkHref="#svg-streams"></use>
-      </svg>
-      {/* /MENU ITEM LINK ICON */}
-      Streams
-    </a>
-    {/* /MENU ITEM LINK */}
-  </li>
-  {/* /MENU ITEM */}
-
-  {/* MENU ITEM */}
-  <li className="menu-item">
-    {/* MENU ITEM LINK */}
-    <a className="menu-item-link" href="events.html">
-      {/* MENU ITEM LINK ICON */}
-      <svg className="menu-item-link-icon icon-events">
-        <use xlinkHref="#svg-events"></use>
-      </svg>
-      {/* /MENU ITEM LINK ICON */}
-      Events
-    </a>
-    {/* /MENU ITEM LINK */}
-  </li>
-  {/* /MENU ITEM */}
-
-  {/* MENU ITEM */}
-  <li className="menu-item">
-    {/* MENU ITEM LINK */}
-    <a className="menu-item-link" href="forums.html">
-      {/* MENU ITEM LINK ICON */}
-      <svg className="menu-item-link-icon icon-forums">
-        <use xlinkHref="#svg-forums"></use>
-      </svg>
-      {/* /MENU ITEM LINK ICON */}
-      Forums
-    </a>
-    {/* /MENU ITEM LINK */}
-  </li>
-  {/* /MENU ITEM */}
-
-  {/* MENU ITEM */}
-  <li className="menu-item">
-    {/* MENU ITEM LINK */}
-    <a className="menu-item-link" href="marketplace.html">
-      {/* MENU ITEM LINK ICON */}
-      <svg className="menu-item-link-icon icon-marketplace">
-        <use xlinkHref="#svg-marketplace"></use>
-      </svg>
-      {/* /MENU ITEM LINK ICON */}
-      Marketplace
-    </a>
-    {/* /MENU ITEM LINK */}
-  </li>
-  {/* /MENU ITEM */}
-</ul>
+    {jsonData && jsonData.map((item, index) => (
+        <JSONItem key={index} data={item} />
+      ))}
+      
+     
+    </ul>
 {/* /MENU */}
 
 
@@ -358,6 +216,31 @@ function navwidget2() {
 
 </nav>
  );
+}
+
+
+
+
+function JSONItem({ data, currentPage }) {
+  const isActive = currentPage === data.link ? 'active' : '';
+
+  return (
+
+      
+    <li className="menu-item">
+        
+    <a className="menu-item-link" href={`${data.link}`} >
+      
+      <svg className="menu-item-link-icon icon-newsfeed">
+        <use xlinkHref={`#svg-${data.icon}`}></use>
+      </svg>
+      
+     {data.title}
+    </a>
+    
+  </li>
+  
+  );
 }
 
 export default navwidget2;
