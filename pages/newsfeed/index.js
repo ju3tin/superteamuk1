@@ -27,6 +27,7 @@ function Newsfeed() {
     const bannerImageUrl = '/img/banner/newsfeed-icon.png';
     const title1 = 'Newsfeed';
     const description = 'Check what your friends have been up to!';
+    const page = 0;
 
  useEffect(() => {
     const script = document.createElement("script");
@@ -51,9 +52,9 @@ function Newsfeed() {
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-    <Navcomponent />
-    <Navcomponent1 />
-    <Navcomponent2 />
+    <Navcomponent currentPage={page}/>
+    <Navcomponent1 currentPage={page} />
+ <Navcomponent2 currentPage={page} />
     <Chatwidget />
     <Chatwidget1 />
     <Header1 />

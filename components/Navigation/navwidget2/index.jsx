@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 
 import jsonData from '../../../menuitems.json'
-function navwidget1() {
+function navwidget1({currentPage}) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -99,7 +99,7 @@ function navwidget1() {
     
     <ul className="menu">
     {jsonData && jsonData.map((item, index) => (
-        <JSONItem key={index} data={item} />
+        <JSONItem key={index} data={item} index={index} currentPage={currentPage}/>
       ))}
       
      
@@ -110,13 +110,15 @@ function navwidget1() {
 }
 
 
-function JSONItem({ data, currentPage }) {
-  const isActive = currentPage === data.link ? 'active' : '';
+function JSONItem({ data, currentPage, index }) {
+  
+
+  const isActive = currentPage === index ? 'active' : '';
 
   return (
 
       
-    <li className="menu-item">
+    <li className={`menu-item ${isActive}`}>
         
     <a className="menu-item-link" href={`${data.link}`} >
       

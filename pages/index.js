@@ -25,10 +25,12 @@ export default function Home() {
 const bannerImageUrl = '/img/banner/newsfeed-icon.png';
 const title1 = 'Newsfeed';
 const description = 'Check what your friends have been up to!';
+const page = 0;
 //const [currentPage, setCurrentPage] = useState(0);  // Define currentPage
 
 useEffect(() => {
 const script = document.createElement("script");
+//const [currentPage] = 0;
 script.src = "/js/app.bundle.min.js";
 script.async = true;
 document.body.appendChild(script);
@@ -36,6 +38,7 @@ return () => {
   document.body.removeChild(script);
  }; 
 }, []);
+
 return (
   
 
@@ -51,9 +54,9 @@ return (
 
      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
    </Head>
- <Navcomponent />
- <Navcomponent1 />
- <Navcomponent2 currentPage={2} />
+   <Navcomponent currentPage={page}/>
+    <Navcomponent1 currentPage={page} />
+ <Navcomponent2 currentPage={page} />
  <Chatwidget />
  <Chatwidget1 />
  <Header1 />
