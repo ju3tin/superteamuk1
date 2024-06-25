@@ -19,7 +19,10 @@ import EventsFilter from '../../components/Events/filter';
 import FullCalendar from '../../components/fullcalendar';
 import Calendar from 'react-calendar';
 import SectionHeader from '../../components/Section/Header';
-import '../../public/css/Calendar.module.css';
+import styles from '../calendar.module.css';
+//import { Head } from 'next/document'
+import '../calendar.module.css'
+//import '../../public/css/Calendar.module.css';
  
 //import 'react-calendar/dist/Calendar.css'; 
  
@@ -50,7 +53,7 @@ function Member() {
     <link rel="stylesheet" href="/css/styles.min.css" />
     <link rel="stylesheet" href="/css/vendor/simplebar.css" />
    
-    <link rel="stylesheet" href="/css/calendar.css" />
+   {/* <link rel="stylesheet" href="/css/calendar.css" /> */}
     <link rel="stylesheet" href="/css/vendor/tiny-slider.css" />
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
