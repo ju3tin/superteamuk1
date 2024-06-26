@@ -62,14 +62,14 @@ return (
 <meta property="article:published_time" content="" />
 <meta property="article:modified_time" content="" />
 <meta property="og:updated_time" content="" />
-<meta property="og:image" content="/assets/img/bg-office1.jpg" />
-<meta property="og:image:secure_url" content="/assets/img/bg-office1.jpg" />
+<meta property="og:image" content="/img/solana.jpg" />
+<meta property="og:image:secure_url" content="/img/solana.jpg" />
 <meta property="og:image:width" content="1280" />
 <meta property="og:image:height" content="800" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:description" content="Blog and website of Superteam's UK" />
 <meta name="twitter:title" content="Superteam's UK" />
-<meta name="twitter:image" content="/assets/img/bg-office1.jpg" />
+<meta name="twitter:image" content="/img/solana.jpg" />
 <meta property="og:image" content="/img/tinyauthor1.jpg" />
 <meta property="og:image:type" content="image/jpg" />
 <meta property="og:image:width" content="400" />
