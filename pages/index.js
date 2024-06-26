@@ -70,7 +70,7 @@ return (
 <meta name="twitter:description" content="Blog and website of Superteam's UK" />
 <meta name="twitter:title" content="Superteam's UK" />
 <meta name="twitter:image" content="/img/solana.jpg" />
-<meta property="og:image" content="/img/tinyauthor1.jpg" />
+<meta property="og:image" content="/img/solana.jpg" />
 <meta property="og:image:type" content="image/jpg" />
 <meta property="og:image:width" content="400" />
 <meta property="og:image:height" content="400" />
