@@ -57,6 +57,7 @@ function Member() {
             'width': '100%',
             'height': '100%',
             'object-fit': 'cover',
+            'overflow': 'hidden',
             'z-index': '-1'}}>
         <source src="/img/3.mp4" type="video/mp4" />
         Your browser does not support the video tag.
