@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Selector</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+        }
+        #background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h1>Welcome to My Website</h1>
+    </div>
+    <video id="background-video" autoplay muted loop>
+        <source src="path_to_your_video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <script>
+        function detectDeviceAndBrowser() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Check if the device is mobile
+            const isMobile = /android|avantgo|blackberry|bada\/|bb10|meego|ipad|iphone|ipod|opera mini|palm( os)?|phone|symbian|webos|windows( ce| phone)|xda|xiino/i.test(userAgent);
+
+            let deviceType = 'Desktop';
+            let browser = 'Unknown';
+
+            if (isMobile) {
+                deviceType = 'Mobile';
+
+                // Check for specific mobile browsers
+                if (/chrome|crios|crmo/i.test(userAgent)) {
+                    browser = 'Chrome';
+                } else if (/safari/i.test(userAgent) && !/chrome|crios|crmo/i.test(userAgent)) {
+                    browser = 'Safari';
+                } else if (/firefox|fxios/i.test(userAgent)) {
+                    browser = 'Firefox';
+                } else if (/opera|opr|opios/i.test(userAgent)) {
+                    browser = 'Opera';
+                } else if (/edg|edgios|edga/i.test(userAgent)) {
+                    browser = 'Edge';
+                } else if (/ucbrowser/i.test(userAgent)) {
+                    browser = 'UC Browser';
+                } else if (/samsungbrowser/i.test(userAgent)) {
+                    browser = 'Samsung Internet';
+                } else if (/qqbrowser/i.test(userAgent)) {
+                    browser = 'QQ Browser';
+                } else if (/baidubrowser/i.test(userAgent)) {
+                    browser = 'Baidu Browser';
+                } else if (/yabrowser/i.test(userAgent)) {
+                    browser = 'Yandex Browser';
+                }
+            }
+
+            return { deviceType, browser };
+        }
+
+        const result = detectDeviceAndBrowser();
+        const videoElement = document.getElementById('background-video');
+
+        if (result.deviceType === 'Mobile' && result.browser === 'Safari') {
+            // Set background image if the device is mobile and the browser is Safari
+            document.body.style.backgroundImage = "url('path_to_your_image.jpg')";
+            videoElement.style.display = 'none';
+        } else {
+            // Otherwise, display the video
+            document.body.style.backgroundImage = 'none';
+            videoElement.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
