@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef  } from 'react';
 import Navcomponent from '../../components/Navigation/navwidget1';
 import Navcomponent1 from '../../components/Navigation/navwidget2';
 import Navcomponent2 from '../../components/Navigation/navwidget3';
@@ -19,14 +19,20 @@ function Member() {
     const title1 = 'Quests';
     const description = 'Complete quests to gain experience and level up!';
     const page = 4;
-
+    const vidRef=useRef();
  useEffect(() => {
+    vidRef.current.play();
     const script = document.createElement("script");
     script.src = "/js/app.bundle.min.js";
     script.async = true;
+    const script1 = document.createElement("script");
+    script1.src = "/js/detect.js";
+    script1.async = true;
     document.body.appendChild(script);
+    document.body.appendChild(script1);
     return () => {
       document.body.removeChild(script);
+      document.body.removeChild(script1);
      }; 
   }, []);
   return (
@@ -43,6 +49,15 @@ function Member() {
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+      <video id="background-video" src="/img/3.mp4" autoplay={true} muted={true} loop={true}  ref={ vidRef } style={{        
+            'position': 'absolute',
+            'top': '0',
+            'left': '0',
+            'width': '100%',
+            'height': '100%',
+            'object-fit': 'cover',
+            'z-index': '-1'}} />
+   
       <Navcomponent currentPage={page}/>
     <Navcomponent1 currentPage={page} />
  <Navcomponent2 currentPage={page} />
@@ -50,18 +65,7 @@ function Member() {
     <Chatwidget1 />
     <Header1 />
     <Bar1 />
-    <video id="background-video" autoplay="" muted="" loop="" style={{        
-            'position': 'absolute',
-            'top': '0',
-            'left': '0',
-            'width': '100%',
-            'height': '100%',
-            'object-fit': 'cover',
-            'overflow': 'hidden',
-            'z-index': '-1'}}>
-        <source src="/img/3.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-    </video>
+   
     <div className="content-grid" style={{'transform': 'translate(368px)', 'transition': 'transform 0.4s ease-in-out'}}>
    <Banner bannerdescription={description} bannertitle={title1} bannerimage={bannerImageUrl}/>
    <div class="section-header">
