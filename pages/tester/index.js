@@ -37,7 +37,7 @@ function Member() {
   }, []);
   return (
     
-    <div>
+    <div>  
      <Head>
         <title>{title1}</title>
 
