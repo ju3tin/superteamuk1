@@ -160,15 +160,4 @@ th {
     inset: 0px;
     position: absolute;
   }
-  .fc .fc-scroller-harness {
-    direction: ltr;
-  }
-  .fc .fc-scroller-harness-liquid {
-    height: 100%;
-  }
-  .fc .fc-scroller-harness {
-    direction: ltr;
-    overflow: hidden;
-    position: relative;
-  }
   
