@@ -12,6 +12,11 @@
   box-shadow: 0 0 40px 0 rgba(94,92,154,.06);
   background-color: #fff;
 }
+.fc-media-screen{
+  margin: auto;
+  width: 90%;
+  padding: 20px;
+}
 .fc .fc-toolbar.fc-header-toolbar {
   margin-bottom: 1.5em;
 }
