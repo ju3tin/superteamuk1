@@ -447,7 +447,7 @@ th {
   font-size: 1em;
 
 }
-root {
+:root {
   --fc-small-font-size: .85em;
   --fc-page-bg-color: #fff;
   --fc-neutral-bg-color: hsla(0,0%,82%,.3);
