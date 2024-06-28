@@ -40,3 +40,77 @@
     overflow: visible;
     text-transform: none;
   }
+
+  .fc, .fc *, .fc ::after, .fc ::before {
+    box-sizing: border-box;
+  }
+
+  .fc th {
+    text-align: center;
+  }
+
+  element {
+}
+.fc, .fc *, .fc ::after, .fc ::before {
+  box-sizing: border-box;
+
+}
+*, ::after, ::before {
+  margin: 0;
+
+  padding: 0;
+
+  border: none;
+
+  outline: none;
+
+  box-sizing: border-box;
+
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+
+}
+.fc th {
+  text-align: center;
+
+}
+th {
+  text-align: inherit;
+
+}
+.fc table {
+  border-collapse: collapse;
+
+  border-spacing: 0px;
+
+  font-size: 1em;
+
+}
+.fc .fc-scroller-harness {
+    direction: ltr;
+  }
+  .fc .fc-scrollgrid {
+    border-collapse: separate;
+  }
+  .fc-direction-ltr {
+    direction: ltr;
+    text-align: left;
+  }
+  .fc {
+    font-size: 1em;
+  }
+  .fc-liquid-hack td, .fc-liquid-hack th {
+    position: relative;
+  }
+  .fc-theme-standard td, .fc-theme-standard th {
+    border: 1px solid var(--fc-border-color);
+  }
+  .fc td, .fc th {
+    padding: 0px;
+    vertical-align: top;
+  }
+  .fc, .fc *, .fc ::after, .fc ::before {
+    box-sizing: border-box;
+  }
+    
