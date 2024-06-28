@@ -510,7 +510,7 @@ th {
 .fc .fc-scrollgrid-section-liquid > td {
   height: 100%;
 }
-.fc .fc-scrollgrid-section, .fc .fc-scrollgrid-section table, .fc .fc-scrollgrid-section > td {
+.fc .fc-scrollgrid-section table, .fc .fc-scrollgrid-section > td {
   height: 1px;
 }
 .fc .fc-scrollgrid-section > * {
