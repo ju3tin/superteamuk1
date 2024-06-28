@@ -68,8 +68,9 @@ function Member() {
     <div className="content-grid" style={{'transform': 'translate(368px)', 'transition': 'transform 0.4s ease-in-out'}}>
     <Banner bannerdescription={description} bannertitle={title1} bannerimage={bannerImageUrl}/>
     <EventsFilter />
-  
+  <div className=''>
     <FullCalendar initialView='dayGridMonth' />
+    </div>
     <SectionHeader sectiontitle={title34} sectionpretitle={pretitle} />
     <Eventitems jsonData={jsonData3} /> 
     

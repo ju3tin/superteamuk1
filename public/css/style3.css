@@ -21,6 +21,21 @@
   margin-top: 1px;
   z-index: 6;
 }
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+  min-height: 2em;
+  position: relative;
+}
+.fc .fc-daygrid-day-events {
+  margin-top: 1px;
+}
+.fc .fc-button:disabled {
+  opacity: 0.65;
+}
+.fc .fc-button-primary:disabled {
+  background-color: var(--fc-button-bg-color);
+  border-color: var(--fc-button-border-color);
+  color: var(--fc-button-text-color);
+}
 a:not([href]) {
   color: inherit;
   text-decoration: none;
