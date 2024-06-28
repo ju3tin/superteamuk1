@@ -22,6 +22,7 @@ import SectionHeader from '../../components/Section/Header';
 import styles from '../calendar.module.css';
 //import { Head } from 'next/document'
 import '../calendar.module.css'
+
 //import '../../public/css/Calendar.module.css';
  
 //import 'react-calendar/dist/Calendar.css'; 
@@ -50,7 +51,7 @@ function Member() {
     <div>
     <Head>
     <title>{title1}</title>
-    <link rel="stylesheet" href="/css/calendar.css" />
+    <link rel="stylesheet" href="/css/style3.css" />
     <link rel="stylesheet" href="/css/vendor/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/styles.min.css" />
     <link rel="stylesheet" href="/css/vendor/simplebar.css" />

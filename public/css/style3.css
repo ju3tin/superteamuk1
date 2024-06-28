@@ -1,0 +1,42 @@
+.fc .fc-button-primary:disabled {
+    background-color: var(--fc-button-bg-color);
+    border-color: var(--fc-button-border-color);
+    color: var(--fc-button-text-color);
+  }
+  .fc .fc-button:disabled {
+    opacity: 0.65;
+  }
+  .fc .fc-button-primary {
+    background-color: var(--fc-button-bg-color);
+    border-color: var(--fc-button-border-color);
+    color: var(--fc-button-text-color);
+  }
+  .fc .fc-button {
+    background-color: transparent;
+    border: 1px solid transparent;
+      border-top-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+    border-radius: 0.25em;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 0.4em 0.65em;
+    text-align: center;
+    user-select: none;
+    vertical-align: middle;
+  }
+  .fc .fc-button {
+    appearance: button;
+  }
+  .fc .fc-button {
+    border-radius: 0px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0px;
+    overflow: visible;
+    text-transform: none;
+  }
