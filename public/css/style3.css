@@ -364,7 +364,7 @@ a.fc-event, a.fc-event:hover {
 }
 .fc .fc-view-harness-active > .fc-view {
   inset: 0px;
-  position: absolute;
+ 
 }
 .fc, .fc *, .fc ::after, .fc ::before {
   box-sizing: border-box;
