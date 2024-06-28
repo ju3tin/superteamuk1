@@ -104,7 +104,7 @@ th {
     position: relative;
   }
   .fc-theme-standard td, .fc-theme-standard th {
-    border: 1px solid ;
+    border: 1px solid var(--fc-border-color);
   }
   .fc td, .fc th {
     padding: 0px;
