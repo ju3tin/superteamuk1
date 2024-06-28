@@ -49,8 +49,7 @@ function Member() {
   <link rel="stylesheet" href="/css/vendor/simplebar.css" />
 
 <link rel="stylesheet" href="/css/timeline.css" />
-<link rel="stylesheet" href="/css/timeline.css" />
- 
+
   <link rel="stylesheet" href="/css/vendor/tiny-slider.css" />
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -67,13 +66,12 @@ function Member() {
       <Navcomponent currentPage={page}/>
     <Navcomponent1 currentPage={page} />
  <Navcomponent2 currentPage={page} />
-    <Chatwidget />
-    <Chatwidget1 />
+
     <Header1 />
     <Bar1 />
-   
-    <div className="content-grid" style={{'transform': 'translate(368px)', 'transition': 'transform 0.4s ease-in-out'}}>
     <TimelineComponent />
+    <div className="content-grid" style={{'transform': 'translate(368px)', 'transition': 'transform 0.4s ease-in-out'}}>
+   
  
       {/* /GRID COLUMN */}
     </div>
