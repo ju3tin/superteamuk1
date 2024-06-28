@@ -65,6 +65,14 @@
 .fc .fc-daygrid-day-events {
   margin-top: 1px;
 }
+.fc-daygrid-event-dot {
+  border: calc(var(--fc-daygrid-event-dot-width)/2) solid var(--fc-event-border-color);
+  border-radius: calc(var(--fc-daygrid-event-dot-width)/2);
+  box-sizing: content-box;
+  height: 0px;
+  margin: 0px 4px;
+  width: 0px;
+}
 .fc, .fc *, .fc ::after, .fc ::before {
   box-sizing: border-box;
 }
