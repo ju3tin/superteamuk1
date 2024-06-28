@@ -104,7 +104,7 @@ th {
     position: relative;
   }
   .fc-theme-standard td, .fc-theme-standard th {
-    border: 1px solid;
+    border: 1px solid var(--fc-border-color);
   }
   .fc td, .fc th {
     padding: 0px;
@@ -126,7 +126,7 @@ th {
     width: 100%;
   }
   .fc-theme-standard .fc-scrollgrid {
-    border: 1px solid;
+    border: 1px solid var(--fc-border-color);
   }
   .fc table {
     border-collapse: collapse;
@@ -171,26 +171,4 @@ th {
     overflow: hidden;
     position: relative;
   }
-  fc .fc-scrollgrid-section-liquid > td {
-    height: 100%;
-  }
-  .fc .fc-scrollgrid-section, .fc .fc-scrollgrid-section table, .fc .fc-scrollgrid-section > td {
-    height: 1px;
-  }
-  .fc .fc-scrollgrid-section > * {
-    border-left-width: 0px;
-    border-top-width: 0px;
-  }
-  .fc td, .fc th {
-    padding: 0px;
-    vertical-align: top;
-  }
-  .fc-theme-standard td, .fc-theme-standard th {
-    border: 1px solid;
-  }
-  .fc-liquid-hack td, .fc-liquid-hack th {
-    position: relative;
-  }
-  .fc-liquid-hack td, .fc-liquid-hack th {
-    position: relative;
-  }
+  
