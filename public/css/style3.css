@@ -126,7 +126,7 @@ th {
     width: 100%;
   }
   .fc-theme-standard .fc-scrollgrid {
-    border: 1px solid var(--fc-border-color);
+    border: 1px solid;
   }
   .fc table {
     border-collapse: collapse;
@@ -186,7 +186,7 @@ th {
     vertical-align: top;
   }
   .fc-theme-standard td, .fc-theme-standard th {
-    border: 1px solid var(--fc-border-color);
+    border: 1px solid;
   }
   .fc-liquid-hack td, .fc-liquid-hack th {
     position: relative;
