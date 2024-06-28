@@ -16,6 +16,7 @@
   margin: auto;
   width: 90%;
   padding: 20px;
+  min-height: 400px;
 }
 .fc .fc-toolbar.fc-header-toolbar {
   margin-bottom: 1.5em;
