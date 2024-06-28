@@ -71,7 +71,7 @@ function Member() {
   
     <FullCalendar initialView='dayGridMonth' />
     <SectionHeader sectiontitle={title34} sectionpretitle={pretitle} />
-    <Eventitems jsonData={jsonData3} />
+    <Eventitems jsonData={jsonData3} /> 
     
     </div>
     </div>
