@@ -16,9 +16,9 @@ import jsonData from '../../groupstest.json';
 import jsonData2 from '../../menuitems.json';
 
 function Quests() {
-    const bannerImageUrl = '/img/banner/groups-icon.png';
-    const title1 = 'Groups';
-    const description = 'Browse all the groups of the community!';
+    const bannerImageUrl = '/img/banner/quests-icon.png';
+    const title1 = 'Quests';
+    const description = 'Complete quests to gain experience and level up!';
     const page = 1;
 
  useEffect(() => {
