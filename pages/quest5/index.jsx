@@ -24,6 +24,8 @@ function Quests() {
     const description = 'Complete quests to gain experience and level up!';
     const page = 1;
     const des2 = 'Featured Quests';
+    const des3 = 'Browse All Quests';
+    const des4 = 'Gain EXP and level up!';
     const des1 = 'GET AN EARLY LEAD!';
 
  useEffect(() => {
@@ -61,7 +63,8 @@ function Quests() {
    <SectionHeader sectiontitle ={des2} sectionpretitle={des1} />
    <Groupmenu />
    <Grid jsonData={jsonData3} />
-
+<SectionHeader sectiontitle ={des3} sectionpretitle={des4} />
+   
       {/* /GRID COLUMN */}
     </div>
    
