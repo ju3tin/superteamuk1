@@ -6,6 +6,8 @@ import Navcomponent2 from '../../components/Navigation/navwidget3';
 import Chatwidget from '../../components/Chat/chatwidget';
 import Chatwidget1 from '../../components/Chat/chatwidget1';
 import Header1 from '../../components/Header';
+import Grid from '../../components/Grid';
+import SectionHeader from '../../components/Section/Header';
 import Bar1 from '../../components/Bar';
 import Banner from '../../components/Banner';
 import BannerImageLink from '../../components/Banner/ImageLink';
@@ -14,12 +16,15 @@ import Groupmenu from '../../components/Group/menu';
 import Groupitem from '../../components/Group/groupitem';
 import jsonData from '../../groupstest.json';
 import jsonData2 from '../../menuitems.json';
+import jsonData3 from '../../123.json';
 
 function Quests() {
     const bannerImageUrl = '/img/banner/quests-icon.png';
     const title1 = 'Quests';
     const description = 'Complete quests to gain experience and level up!';
     const page = 1;
+    const des2 = 'Featured Quests';
+    const des1 = 'GET AN EARLY LEAD!';
 
  useEffect(() => {
     const script = document.createElement("script");
@@ -53,8 +58,9 @@ function Quests() {
     <Bar1 />
     <div className="content-grid" style={{'transform': 'translate(368px)', 'transition': 'transform 0.4s ease-in-out'}}>
    <Banner bannerdescription={description} bannertitle={title1} bannerimage={bannerImageUrl}/>
+   <SectionHeader sectiontitle ={des2} sectionpretitle={des1} />
    <Groupmenu />
-     <Groupitem jsonData={jsonData} />
+   <Grid jsonData={jsonData3} />
 
       {/* /GRID COLUMN */}
     </div>
