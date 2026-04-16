@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Luma Events</title>
+
+<!-- Leaflet (Map) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- FullCalendar -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+<style>
+body {
+  font-family: Arial;
+  background: #f7f7f7;
+  padding: 20px;
+}
+
+h1 { text-align: center; }
+
+.controls {
+  max-width: 900px;
+  margin: 0 auto 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#map {
+  height: 320px;
+  max-width: 900px;
+  margin: 0 auto 20px;
+  border-radius: 10px;
+}
+
+#calendar {
+  max-width: 900px;
+  margin: 20px auto;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.events {
+  display: grid;
+  gap: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.event {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.event img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.event a {
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 8px;
+  color: blue;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Luma Events</h1>
+
+<div class="controls">
+  <input id="search" placeholder="Search events..." />
+</div>
+
+<div id="map"></div>
+
+<div id="calendar"></div>
+
+<div id="events" class="events"></div>
+
+<script>
+const API_URL = "https://byihkeitthikkbhfwwlg.supabase.co/functions/v1/luma-events";
+
+let map;
+let markers = [];
+let allEvents = [];
+let calendar;
+
+function initMap() {
+  map = L.map('map').setView([51.5074, -0.1278], 6);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+}
+
+function clearMarkers() {
+  markers.forEach(m => map.removeLayer(m));
+  markers = [];
+}
+
+function addMarker(event) {
+  const lat = event.coordinates?.lat;
+  const lng = event.coordinates?.lng;
+
+  if (!lat || !lng) return;
+
+  const marker = L.marker([lat, lng])
+    .addTo(map)
+    .bindPopup(`
+      <b>${event.name}</b><br>
+      ${event.location?.city || ""}
+    `);
+
+  markers.push(marker);
+}
+
+function renderList(events) {
+  const container = document.getElementById("events");
+  container.innerHTML = "";
+  clearMarkers();
+
+  events.forEach(event => {
+    const div = document.createElement("div");
+    div.className = "event";
+
+    div.innerHTML = `
+      <img src="${event.cover_url}" />
+      <h2>${event.name}</h2>
+      <p>📍 ${event.location?.address || ""}, ${event.location?.city || ""}</p>
+      <p>🕒 ${new Date(event.start_at).toLocaleString()}</p>
+      <a href="${event.url}" target="_blank">View Event →</a>
+    `;
+
+    container.appendChild(div);
+    addMarker(event);
+  });
+}
+
+function initCalendar(events) {
+  const calendarEl = document.getElementById("calendar");
+
+  const calendarEvents = events.map(e => ({
+    title: e.name,
+    start: e.start_at,
+    end: e.end_at,
+    url: e.url
+  }));
+
+  calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    height: "auto",
+    events: calendarEvents,
+    eventClick: function(info) {
+      info.jsEvent.preventDefault();
+      window.open(info.event.url, "_blank");
+    }
+  });
+
+  calendar.render();
+}
+
+function filterEvents(q) {
+  q = q.toLowerCase();
+
+  const filtered = allEvents.filter(e =>
+    e.name.toLowerCase().includes(q) ||
+    (e.location?.city || "").toLowerCase().includes(q) ||
+    (e.description || "").toLowerCase().includes(q)
+  );
+
+  renderList(filtered);
+
+  if (calendar) {
+    calendar.removeAllEvents();
+    calendar.addEventSource(filtered.map(e => ({
+      title: e.name,
+      start: e.start_at,
+      end: e.end_at,
+      url: e.url
+    })));
+  }
+}
+
+async function loadEvents() {
+  const res = await fetch(API_URL);
+  const data = await res.json();
+
+  allEvents = data.events || [];
+
+  renderList(allEvents);
+  initCalendar(allEvents);
+}
+
+document.getElementById("search").addEventListener("input", e => {
+  filterEvents(e.target.value);
+});
+
+initMap();
+loadEvents();
+</script>
+
+</body>
+</html>
