@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Luma Events</title>
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- FullCalendar -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+<style>
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: #0b0f17;
+  color: #e8eefc;
+  margin: 0;
+}
+
+/* Header */
+h1 {
+  text-align: center;
+  font-size: 28px;
+  padding: 18px 0 8px;
+}
+
+/* Sticky search */
+.controls {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(11, 15, 23, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+input {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  display: block;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: #121a2a;
+  color: white;
+  outline: none;
+}
+
+/* Layout containers */
+#map, #calendar, .events {
+  max-width: 900px;
+  margin: 18px auto;
+}
+
+/* MAP */
+#map {
+  height: 340px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* CALENDAR */
+#calendar {
+  background: #121a2a;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* EVENTS GRID */
+.events {
+  display: grid;
+  gap: 14px;
+  padding-bottom: 40px;
+}
+
+/* CARD */
+.event {
+  background: #121a2a;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: 0.2s ease;
+}
+
+.event:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+.event img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.event h2 {
+  font-size: 18px;
+  margin: 12px;
+}
+
+.event p {
+  margin: 6px 12px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.event a {
+  display: inline-block;
+  margin: 10px 12px 14px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(99, 102, 241, 0.15);
+  color: #a5b4fc;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.event a:hover {
+  background: rgba(99, 102, 241, 0.3);
+}
+
+/* Calendar polish */
+.fc {
+  --fc-border-color: rgba(255,255,255,0.08);
+  --fc-today-bg-color: rgba(99,102,241,0.15);
+  --fc-event-bg-color: #6366f1;
+  --fc-event-border-color: #6366f1;
+  color: white;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Luma Events</h1>
+
+<div class="controls">
+  <input id="search" placeholder="Search events..." />
+</div>
+
+<div id="map"></div>
+<div id="calendar"></div>
+<div id="events" class="events"></div>
+
+<script>
+
+const API_URL = "https://byihkeitthikkbhfwwlg.supabase.co/functions/v1/luma-events";
+
+let map;
+let markers = [];
+let allEvents = [];
+let calendar;
+
+/* MAP */
+function initMap() {
+  map = L.map('map').setView([51.5074, -0.1278], 6);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+}
+
+function clearMarkers() {
+  markers.forEach(m => map.removeLayer(m));
+  markers = [];
+}
+
+function addMarker(event) {
+  const lat = event.coordinates?.lat;
+  const lng = event.coordinates?.lng;
+
+  if (!lat || !lng) return;
+
+  const marker = L.marker([lat, lng])
+    .addTo(map)
+    .bindPopup(`
+      <b>${event.name}</b><br>
+      ${event.location?.city || ""}
+    `);
+
+  markers.push(marker);
+}
+
+/* LIST */
+function renderList(events) {
+  const container = document.getElementById("events");
+  container.innerHTML = "";
+  clearMarkers();
+
+  events.forEach(event => {
+    const div = document.createElement("div");
+    div.className = "event";
+
+    div.innerHTML = `
+      <img src="${event.cover_url}" />
+      <h2>${event.name}</h2>
+      <p>📍 ${event.location?.address || ""}, ${event.location?.city || ""}</p>
+      <p>🕒 ${new Date(event.start_at).toLocaleString()}</p>
+      <a href="${event.url}" target="_blank">View Event →</a>
+    `;
+
+    container.appendChild(div);
+    addMarker(event);
+  });
+}
+
+/* CALENDAR */
+function initCalendar(events) {
+  const el = document.getElementById("calendar");
+
+  const formatted = events.map(e => ({
+    title: e.name,
+    start: e.start_at,
+    end: e.end_at,
+    url: e.url
+  }));
+
+  calendar = new FullCalendar.Calendar(el, {
+    initialView: "dayGridMonth",
+    height: "auto",
+    events: formatted,
+    eventClick: function(info) {
+      info.jsEvent.preventDefault();
+      window.open(info.event.url, "_blank");
+    }
+  });
+
+  calendar.render();
+}
+
+/* FILTER */
+function filterEvents(q) {
+  q = q.toLowerCase();
+
+  const filtered = allEvents.filter(e =>
+    e.name.toLowerCase().includes(q) ||
+    (e.location?.city || "").toLowerCase().includes(q) ||
+    (e.description || "").toLowerCase().includes(q)
+  );
+
+  renderList(filtered);
+
+  if (calendar) {
+    calendar.removeAllEvents();
+    calendar.addEventSource(filtered.map(e => ({
+      title: e.name,
+      start: e.start_at,
+      end: e.end_at,
+      url: e.url
+    })));
+  }
+}
+
+/* LOAD */
+async function loadEvents() {
+  const res = await fetch(API_URL);
+  const data = await res.json();
+
+  allEvents = data.events || [];
+
+  renderList(allEvents);
+  initCalendar(allEvents);
+}
+
+/* SEARCH */
+document.getElementById("search").addEventListener("input", e => {
+  filterEvents(e.target.value);
+});
+
+/* INIT */
+initMap();
+loadEvents();
+
+</script>
+
+</body>
+</html>
