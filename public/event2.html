@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Luma Events</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f7f7f7;
+}
+
+h1 { text-align: center; }
+
+.controls {
+  max-width: 800px;
+  margin: 0 auto 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#map {
+  height: 320px;
+  max-width: 800px;
+  margin: 0 auto 20px;
+  border-radius: 10px;
+}
+
+.events {
+  display: grid;
+  gap: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.event {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.event img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.event a {
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 8px;
+  color: blue;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Luma Events</h1>
+
+<div class="controls">
+  <input id="search" placeholder="Search events..." />
+</div>
+
+<div id="map"></div>
+<div id="events" class="events"></div>
+
+<script>
+const API_URL = "https://byihkeitthikkbhfwwlg.supabase.co/functions/v1/luma-events";
+
+let map;
+let markers = [];
+let allEvents = [];
+
+function initMap() {
+  map = L.map('map').setView([51.5074, -0.1278], 6);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+}
+
+function clearMarkers() {
+  markers.forEach(m => map.removeLayer(m));
+  markers = [];
+}
+
+function addMarker(event) {
+  const lat = event.coordinates?.lat;
+  const lng = event.coordinates?.lng;
+
+  if (!lat || !lng) return;
+
+  const marker = L.marker([lat, lng])
+    .addTo(map)
+    .bindPopup(`
+      <b>${event.name}</b><br>
+      ${event.location?.city || ""}
+    `);
+
+  markers.push(marker);
+}
+
+function googleCalendarLink(event) {
+  const start = new Date(event.start_at).toISOString().replace(/[-:]|\.\d{3}/g, "");
+  const end = new Date(event.end_at).toISOString().replace(/[-:]|\.\d{3}/g, "");
+
+  const details = encodeURIComponent(event.description || "");
+  const location = encodeURIComponent(event.location?.address || "");
+
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.name)}&dates=${start}/${end}&details=${details}&location=${location}`;
+}
+
+function render(events) {
+  const container = document.getElementById("events");
+  container.innerHTML = "";
+  clearMarkers();
+
+  if (!events.length) {
+    container.innerHTML = "<p>No events found.</p>";
+    return;
+  }
+
+  events.forEach(event => {
+    const div = document.createElement("div");
+    div.className = "event";
+
+    div.innerHTML = `
+      <img src="${event.cover_url}" />
+      <h2>${event.name}</h2>
+      <p>📍 ${event.location?.address || ""}, ${event.location?.city || ""}</p>
+      <p>🕒 ${new Date(event.start_at).toLocaleString()}</p>
+
+      <a href="${event.url}" target="_blank">View Event →</a>
+      <a href="${googleCalendarLink(event)}" target="_blank">Add to Google Calendar 📅</a>
+    `;
+
+    container.appendChild(div);
+
+    addMarker(event);
+  });
+}
+
+function filter(q) {
+  q = q.toLowerCase();
+
+  const filtered = allEvents.filter(e =>
+    e.name.toLowerCase().includes(q) ||
+    (e.location?.city || "").toLowerCase().includes(q) ||
+    (e.description || "").toLowerCase().includes(q)
+  );
+
+  render(filtered);
+}
+
+async function load() {
+  const res = await fetch(API_URL);
+  const data = await res.json();
+
+  allEvents = data.events || [];
+  render(allEvents);
+}
+
+document.getElementById("search").addEventListener("input", e => {
+  filter(e.target.value);
+});
+
+initMap();
+load();
+</script>
+
+</body>
+</html>
